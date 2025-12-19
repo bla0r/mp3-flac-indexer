@@ -1,0 +1,44 @@
+# mp3flac-indexer config (C++20 + TagLib)
+
+# Scan roots:
+# - Either use MUSIC_DIR (fallback for both types)...
+# - ...or use MP3_DIR/FLAC_DIR for type-specific roots (recommended).
+#
+# Example "recent" layout:
+#   /site/recent/mp3/YYYY-MM-DD/<release>/.../*.mp3
+#   /site/recent/flac/YYYY-MM-DD/<release>/.../*.flac
+MP3_DIR=/site/recent/mp3
+FLAC_DIR=/site/recent/flac
+
+# Backwards compatible:
+#MUSIC_DIR=/glftpd/site/MUSIC
+#MUSIC_DIR=/mnt/music2
+
+# Where the index trees will be created:
+#   <INDEX_ROOT>/mp3/{alpha,genre,year,groups}/...
+#   <INDEX_ROOT>/flac/{alpha,genre,groups,year}/...
+INDEX_ROOT=/index
+
+# Enable mp3 and/or flac
+ENABLE_TYPES=mp3,flac
+
+# Which index categories to create per type (comma-separated).
+# Supported: alpha, genre, year, groups, artist, album
+# MP3 order you requested: alpha, genre, year, groups
+MP3_INDEXES=alpha,genre,year,groups
+# FLAC order you requested: alpha, genre, groups, year
+FLAC_INDEXES=alpha,genre,groups,year
+
+# How many directory components below the scan root define the release directory.
+# For /site/recent/<type>/YYYY-MM-DD/<release>/... this should be 2.
+MP3_RELEASE_DEPTH=2
+FLAC_RELEASE_DEPTH=2
+
+# Create relative symlinks (nice for moving the whole tree). If relative fails, falls back to absolute.
+RELATIVE_SYMLINKS=true
+
+# Clean the enabled index categories at start (removes all entries under each category dir).
+CLEAN_ON_START=false
+
+# Follow directory symlinks while scanning (default false).
+FOLLOW_SYMLINKS=false
